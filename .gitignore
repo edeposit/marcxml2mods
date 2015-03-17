@@ -1,0 +1,8 @@
+*.pyc
+dist/*
+src/marcxml2mods.egg-info/*
+docs/_build
+MANIFEST
+*.html
+src/marcxml2mods/aleph
+src/marcxml2mods/decoders/aleph
