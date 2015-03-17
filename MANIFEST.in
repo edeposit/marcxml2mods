@@ -1,0 +1,4 @@
+include CONTRIBUTORS.rst CHANGES.rst README.rst LICENSE.txt
+recursive-exclude tests *
+recursive-include docs *
+recursive-include src/marcxml2mods/xslt *
