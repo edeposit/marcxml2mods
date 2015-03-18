@@ -27,7 +27,7 @@ $CONTENT
 
 
 # Functions & objects =========================================================
-def oai_to_xml(marc_oai):
+def oai_to_xml(marc_oai):  # TODO: move this to MARC XML parser
     """
     Convert OAI to MARC XML.
 
