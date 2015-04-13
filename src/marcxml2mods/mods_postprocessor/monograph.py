@@ -5,9 +5,9 @@
 #
 # Imports =====================================================================
 import dhtmlparser
+from remove_hairs import remove_hairs
 
 from shared_funcs import insert_tag
-from shared_funcs import remove_hairs
 from shared_funcs import transform_content
 
 

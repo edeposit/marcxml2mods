@@ -43,6 +43,7 @@ setup(
         "xmltodict",
         "pydhtmlparser>=2.0.9",
         "edeposit.amqp.aleph>=1.6.3",  # TODO: into standalone module for MARC XML
+        "remove_hairs",
     ],
     extras_require={
         "test": [

@@ -8,7 +8,6 @@ import dhtmlparser
 
 from marcxml2mods import xslt_transformer
 from marcxml2mods import mods_postprocessor
-from marcxml2mods.mods_postprocessor.shared_funcs import remove_hairs
 
 import test_xslt_transformer
 
@@ -18,10 +17,6 @@ POSTPROCESSED_FN = test_xslt_transformer.DIRNAME + "postprocessed_mods.xml"
 
 
 # Tests =======================================================================
-def test_remove_hairs():
-    assert remove_hairs(",a-sd,-/") == "a-sd"
-
-
 def test_postprocess_mods():
     result = xslt_transformer.transform_to_mods(
         test_xslt_transformer.OAI_FILENAME,

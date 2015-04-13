@@ -8,26 +8,6 @@ import dhtmlparser
 
 
 # Functions & classes =========================================================
-def remove_hairs(inp, hairs="/:;,- []<>()"):
-    """
-    Remove "special" characters from beginning and the end of the `inp`. For
-    example ``,a-sd,-/`` -> ``a-sd``.
-
-    Args:
-        inp (str): Input string.
-
-    Returns:
-        str: Cleaned string.
-    """
-    while inp and inp[-1] in hairs:
-        inp = inp[:-1]
-
-    while inp and inp[0] in hairs:
-        inp = inp[1:]
-
-    return inp
-
-
 def insert_tag(tag, before, root):
     """
     Insert `tag` before `before` tag if present. If not, insert it into `root`.
