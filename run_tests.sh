@@ -1,6 +1,4 @@
-#! /usr/bin/env bash
+#! /usr/bin/env sh
+PYTHONPATH="src:$PYTHONPATH"
 
-PYTHONPATH="$PYTHONPATH:src"
-TEST_PATH="tests"
-
-py.test "$TEST_PATH"
+py.test tests $@
