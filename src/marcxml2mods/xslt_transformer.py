@@ -27,7 +27,7 @@ $CONTENT
 
 
 # Functions & objects =========================================================
-def oai_to_xml(marc_oai):  # TODO: move this to MARC XML parser
+def oai_to_xml(marc_oai):  # TODO: move this to MARC XML parser?
     """
     Convert OAI to MARC XML.
 
@@ -131,7 +131,7 @@ def _read_template(template):
     return ET.parse(template_xml)
 
 
-def transform(xml, template):
+def xslt_transformation(xml, template):
     """
     Transform `xml` using XSLT `template`.
 
@@ -169,7 +169,7 @@ def transform_to_mods(marc_xml, uuid):
     dirname = os.path.dirname(__file__)
     mods_template = os.path.join(dirname, "xslt/MARC21slim2MODS3-4-NDK.xsl")
 
-    transformed = transform(marc_xml, mods_template)
+    transformed = xslt_transformation(marc_xml, mods_template)
 
     # return all mods tags as list
     mods = []
@@ -199,7 +199,7 @@ def transform_to_mods(marc_xml, uuid):
 #         "xslt/MARC21toMultiMonographTitle.xsl"
 #     )
 
-#     return transform(marc_xml, mods_template)
+#     return xslt_transformation(marc_xml, mods_template)
 
 
 # def transform_to_mods_periodical(marc_xml):
@@ -219,4 +219,4 @@ def transform_to_mods(marc_xml, uuid):
 #         "xslt/MARC21toPeriodicalTitle.xsl"
 #     )
 
-#     return transform(marc_xml, mods_template)
+#     return xslt_transformation(marc_xml, mods_template)

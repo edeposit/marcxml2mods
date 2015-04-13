@@ -138,8 +138,8 @@ def test_read_template_fn():
     assert "</xsl:stylesheet>" in xslt_str
 
 
-def test_transform():
-    result = xslt_transformer.transform(OAI_FILENAME, XSLT_FILENAME)
+def test_xslt_transformation():
+    result = xslt_transformer.xslt_transformation(OAI_FILENAME, XSLT_FILENAME)
 
     with open(TRANSFORMED_FN) as f:
         assert result == f.read()
