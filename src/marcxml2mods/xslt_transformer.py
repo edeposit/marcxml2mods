@@ -9,7 +9,7 @@ import StringIO
 import lxml.etree as ET
 
 import dhtmlparser
-from edeposit.amqp.aleph import marcxml
+from marcxml_parser import MARCXMLRecord
 
 import mods_postprocessor
 
@@ -37,10 +37,10 @@ def oai_to_xml(marc_oai):  # TODO: move this to MARC XML parser
     Returns:
         str: String with MARC XML.
     """
-    record = marcxml.MARCXMLRecord(marc_oai)
+    record = MARCXMLRecord(marc_oai)
     record.oai_marc = False
 
-    return record.toXML()
+    return record.to_XML()
 
 
 def _add_namespace(marc_xml):

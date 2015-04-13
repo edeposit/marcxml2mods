@@ -38,11 +38,10 @@ setup(
 
     zip_safe=False,
     install_requires=[
-        'setuptools',
         "lxml",
         "xmltodict",
         "pydhtmlparser>=2.0.9",
-        "edeposit.amqp.aleph>=1.6.3",  # TODO: into standalone module for MARC XML
+        "marcxml_parser",
         "remove_hairs",
     ],
     extras_require={
