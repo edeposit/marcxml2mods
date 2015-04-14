@@ -8,15 +8,17 @@ import os
 import os.path
 
 import dhtmlparser
+from marcxml_parser import MARCXMLRecord
 
 import mods_postprocessor
 from xslt_transformer import xslt_transformation
+from xslt_transformer import _read_content_or_path
 
 
 # Functions & classes =========================================================
-def _template_path(fn):
+def _absolute_template_path(fn):
     """
-    Return Absolute path for filename from local ``xslt/`` directory.
+    Return absolute path for filename from local ``xslt/`` directory.
 
     Args:
         fn (str): Filename. ``MARC21slim2MODS3-4-NDK.xsl`` for example.
@@ -61,7 +63,7 @@ def transform_to_mods_mono(marc_xml, uuid):
     """
     transformed = xslt_transformation(
         marc_xml,
-        _template_path("MARC21slim2MODS3-4-NDK.xsl")
+        _absolute_template_path("MARC21slim2MODS3-4-NDK.xsl")
     )
 
     return _apply_postprocessing(
@@ -85,7 +87,7 @@ def transform_to_mods_multimono(marc_xml, uuid):
     """
     transformed = xslt_transformation(
         marc_xml,
-        _template_path("MARC21toMultiMonographTitle.xsl")
+        _absolute_template_path("MARC21toMultiMonographTitle.xsl")
     )
 
     return _apply_postprocessing(
@@ -105,11 +107,11 @@ def transform_to_mods_periodical(marc_xml, uuid):
         uuid (str): UUID string giving the package ID.
 
     Returns:
-        str: Transformed xml as string.
+        list: Collection of transformed xml strings.
     """
     transformed = xslt_transformation(
         marc_xml,
-        _template_path("MARC21toPeriodicalTitle.xsl")
+        _absolute_template_path("MARC21toPeriodicalTitle.xsl")
     )
 
     return _apply_postprocessing(
@@ -120,4 +122,27 @@ def transform_to_mods_periodical(marc_xml, uuid):
 
 
 def marcxml2mods(marc_xml, uuid):
-    pass
+    """
+    Convert `marc_xml` to MODS. Decide type of the record and what template to
+    use (monograph, multi-monograph, periodical).
+
+    Args:
+        marc_xml (str): Filename or XML string. Don't use ``\\n`` in case of
+                        filename.
+        uuid (str): UUID string giving the package ID.
+
+    Returns:
+        list: Collection of transformed xml strings.
+    """
+    record = MARCXMLRecord(
+        _read_content_or_path(marc_xml)
+    )
+
+    if record.is_monographic or record.is_single_unit:
+        return transform_to_mods_mono(marc_xml, uuid)
+    elif record.is_multi_mono:
+        return transform_to_mods_multimono(marc_xml, uuid)
+    elif record.is_continuing:
+        return transform_to_mods_periodical(marc_xml, uuid)
+
+    raise ValueError("Can't identify type of the `marc_xml`!")
