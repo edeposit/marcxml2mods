@@ -11,8 +11,6 @@ import lxml.etree as ET
 import dhtmlparser
 from marcxml_parser import MARCXMLRecord
 
-import mods_postprocessor
-
 
 # Variables ===================================================================
 XML_TEMPLATE = """<root>
@@ -131,10 +129,6 @@ def _read_template(template):
     return ET.parse(template_xml)
 
 
-def _template_path(fn):
-    return os.path.join(os.path.dirname(__file__), "xslt", fn)
-
-
 def xslt_transformation(xml, template):
     """
     Transform `xml` using XSLT `template`.
@@ -156,71 +150,3 @@ def xslt_transformation(xml, template):
     )
 
     return ET.tostring(newdom, pretty_print=True, encoding="utf-8")
-
-
-def transform_to_mods_mono(marc_xml, uuid):
-    """
-    Convert `marc_xml` to MODS data format.
-
-    Args:
-        marc_xml (str): Filename or XML string. Don't use ``\\n`` in case of
-                        filename.
-        uuid (str): UUID string giving the package ID.
-
-    Returns:
-        list: Collection of transformed xml strings.
-    """
-    transformed = xslt_transformation(
-        marc_xml,
-        _template_path("MARC21slim2MODS3-4-NDK.xsl")
-    )
-
-    # postprocessing
-    mods = []  # there may be multiple mods tags
-    dom = dhtmlparser.parseString(transformed)
-    for cnt, col in enumerate(dom.find("mods:mods")):
-        mods.append(
-            mods_postprocessor.postprocess_monograph(col, uuid, cnt)
-        )
-
-    return mods
-
-
-# def transform_to_mods_multimonograph(marc_xml):
-#     """
-#     Convert `marc_xml` to multimonograph MODS data format.
-
-#     Args:
-#         marc_xml (str): Filename or XML string. Don't use ``\\n`` in case of
-#                         filename.
-
-#     Returns:
-#         str: Transformed xml as string.
-#     """
-#     dirname = os.path.dirname(__file__)
-#     mods_template = os.path.join(
-#         dirname,
-#         "xslt/MARC21toMultiMonographTitle.xsl"
-#     )
-
-#     return xslt_transformation(marc_xml, mods_template)
-
-
-# def transform_to_mods_periodical(marc_xml):
-#     """
-#     Convert `marc_xml` to periodical MODS data format.
-
-#     Args:
-#         marc_xml (str): Filename or XML string. Don't use ``\\n`` in case of
-#                         filename.
-
-#     Returns:
-#         str: Transformed xml as string.
-#     """
-#     dirname = os.path.dirname(__file__)
-#     mods_template = os.path.join(
-#         dirname,
-#         "xslt/MARC21toPeriodicalTitle.xsl"
-#     )
-
-#     return xslt_transformation(marc_xml, mods_template)
