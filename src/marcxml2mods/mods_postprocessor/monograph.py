@@ -19,9 +19,13 @@ def get_mods_tag(dom):
     return dom.find("mods:mods")[0]
 
 
-def add_missing_xml_attributes(dom, counter):
+def add_missing_xml_attributes(dom, volume_counter=0):
     """
     Add `xmlns` and `ID` attributes to ``<mods:mods>`` tag.
+
+    Args:
+        dom (HTMLElement): DOM containing whole document.
+        volume_counter (int, default 0): ID of volume.
     """
     mods_tag = get_mods_tag(dom)
 
@@ -29,7 +33,7 @@ def add_missing_xml_attributes(dom, counter):
         params = mods_tag.params
 
         # add missing attributes
-        params["ID"] = "MODS_VOLUME_%04d" % (counter + 1)
+        params["ID"] = "MODS_VOLUME_%04d" % (volume_counter + 1)
         params["xmlns:mods"] = "http://www.loc.gov/mods/v3"
         params["xmlns:xlink"] = "http://www.w3.org/1999/xlink"
         params["xmlns:xsi"] = "http://www.w3.org/2001/XMLSchema-instance"

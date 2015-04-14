@@ -29,7 +29,7 @@ def test_oai_to_xml():
 
     assert oai_content
 
-    marc_xml = xslt_transformer.oai_to_xml(oai_content)
+    marc_xml = xslt_transformer._oai_to_xml(oai_content)
 
     assert marc_xml
     assert "<record" in marc_xml
@@ -146,7 +146,7 @@ def test_xslt_transformation():
 
 
 def test_transform_to_mods():
-    result = xslt_transformer.transform_to_mods(OAI_FILENAME, "someid")
+    result = xslt_transformer.transform_to_mods_mono(OAI_FILENAME, "someid")
 
     with open(POSTPROCESSED_FN) as f:
         assert result[0] == f.read()

@@ -18,7 +18,7 @@ POSTPROCESSED_FN = test_xslt_transformer.DIRNAME + "postprocessed_mods.xml"
 
 # Tests =======================================================================
 def test_postprocess_mods():
-    result = xslt_transformer.transform_to_mods(
+    result = xslt_transformer.transform_to_mods_mono(
         test_xslt_transformer.OAI_FILENAME,
         "someid"
     )

@@ -27,7 +27,7 @@ $CONTENT
 
 
 # Functions & objects =========================================================
-def oai_to_xml(marc_oai):  # TODO: move this to MARC XML parser?
+def _oai_to_xml(marc_oai):  # TODO: move this to MARC XML parser?
     """
     Convert OAI to MARC XML.
 
@@ -100,7 +100,7 @@ def _read_marcxml(xml):
 
     # process input file - convert it from possible OAI to MARC XML and add
     # required XML namespaces
-    marc_xml = oai_to_xml(marc_xml)
+    marc_xml = _oai_to_xml(marc_xml)
     marc_xml = _add_namespace(marc_xml)
 
     file_obj = StringIO.StringIO(marc_xml)
@@ -131,6 +131,10 @@ def _read_template(template):
     return ET.parse(template_xml)
 
 
+def _template_path(fn):
+    return os.path.join(os.path.dirname(__file__), "xslt", fn)
+
+
 def xslt_transformation(xml, template):
     """
     Transform `xml` using XSLT `template`.
@@ -154,7 +158,7 @@ def xslt_transformation(xml, template):
     return ET.tostring(newdom, pretty_print=True, encoding="utf-8")
 
 
-def transform_to_mods(marc_xml, uuid):
+def transform_to_mods_mono(marc_xml, uuid):
     """
     Convert `marc_xml` to MODS data format.
 
@@ -166,13 +170,13 @@ def transform_to_mods(marc_xml, uuid):
     Returns:
         list: Collection of transformed xml strings.
     """
-    dirname = os.path.dirname(__file__)
-    mods_template = os.path.join(dirname, "xslt/MARC21slim2MODS3-4-NDK.xsl")
+    transformed = xslt_transformation(
+        marc_xml,
+        _template_path("MARC21slim2MODS3-4-NDK.xsl")
+    )
 
-    transformed = xslt_transformation(marc_xml, mods_template)
-
-    # return all mods tags as list
-    mods = []
+    # postprocessing
+    mods = []  # there may be multiple mods tags
     dom = dhtmlparser.parseString(transformed)
     for cnt, col in enumerate(dom.find("mods:mods")):
         mods.append(
