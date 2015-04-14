@@ -75,6 +75,27 @@ def _add_namespace(marc_xml):
     return str(dom)
 
 
+def _read_content_or_path(content_or_path):
+    """
+    If `content_or_path` contains ``\\n``, return it. Else assume, that it is
+    path and read file at that path.
+
+    Args:
+        content_or_path (str): Content or path to the file.
+
+    Returns:
+        str: Content.
+    """
+    if "\n" in content_or_path.strip():
+        return content_or_path
+
+    if not os.path.exists(content_or_path):
+        raise UserWarning("File '%s' doesn't exists!" % content_or_path)
+
+    with open(content_or_path) as f:
+        return f.read()
+
+
 def _read_marcxml(xml):
     """
     Read MARC XML or OAI file, convert, add namespace and return XML in
@@ -88,13 +109,7 @@ def _read_marcxml(xml):
         obj: Required XML parsed with ``lxml.etree``.
     """
     # read file, if `xml` is valid file path
-    marc_xml = xml
-    if "\n" not in xml.strip():
-        if not os.path.exists(xml):
-            raise UserWarning("XML file '%s' doesn't exists!" % xml)
-
-        with open(xml) as f:
-            marc_xml = f.read()
+    marc_xml = _read_content_or_path(xml)
 
     # process input file - convert it from possible OAI to MARC XML and add
     # required XML namespaces
@@ -117,16 +132,10 @@ def _read_template(template):
     Returns:
         obj: Required XML parsed with ``lxml.etree``.
     """
-    template_xml = ""
-    if "\n" in template.strip():
-        template_xml = StringIO.StringIO(template)
-    else:
-        if not os.path.exists(template):
-            raise UserWarning("Template '%s' doesn't exists!" % template)
+    template = _read_content_or_path(template)
+    file_obj = StringIO.StringIO(template)
 
-        template_xml = open(template)
-
-    return ET.parse(template_xml)
+    return ET.parse(file_obj)
 
 
 def xslt_transformation(xml, template):
