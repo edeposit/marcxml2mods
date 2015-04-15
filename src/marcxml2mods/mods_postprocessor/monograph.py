@@ -12,6 +12,16 @@ from shared_funcs import transform_content
 
 
 # Functions & objects =========================================================
+def add_xml_declaration(fn):
+    def add_xml_declaration_decorator(*args, **kwargs):
+        return '<?xml version="1.0" encoding="UTF-8"?>\n\n' + fn(
+            *args,
+            **kwargs
+        )
+
+    return add_xml_declaration_decorator
+
+
 def get_mods_tag(dom):
     """
     Find and return HTMLElement with ``<mods:mods>`` tag from the `dom`.
@@ -247,6 +257,7 @@ def fix_related_item_tag(dom):
         related_item.replaceWith(dhtmlparser.HTMLElement())
 
 
+@add_xml_declaration
 def postprocess_monograph(mods, uuid, counter):
     """
     Fix bugs in `mods` produced by XSLT template.
@@ -262,7 +273,6 @@ def postprocess_monograph(mods, uuid, counter):
     dom = mods
     if not isinstance(mods, dhtmlparser.HTMLElement):
         dom = dhtmlparser.parseString(mods)
-
     dhtmlparser.makeDoubleLinked(dom)
 
     add_missing_xml_attributes(dom, counter)
@@ -284,4 +294,4 @@ def postprocess_monograph(mods, uuid, counter):
     fix_location_tag(dom)
     fix_related_item_tag(dom)
 
-    return '<?xml version="1.0" encoding="UTF-8"?>\n\n' + dom.prettify()
+    return dom.prettify()
