@@ -92,7 +92,7 @@ def transform_to_mods_multimono(marc_xml, uuid):
 
     return _apply_postprocessing(
         xml=transformed,
-        func=mods_postprocessor.postprocess_monograph,  # TODO: multimono
+        func=mods_postprocessor.postprocess_multi_mono,
         uuid=uuid
     )
 
@@ -116,7 +116,7 @@ def transform_to_mods_periodical(marc_xml, uuid):
 
     return _apply_postprocessing(
         xml=transformed,
-        func=mods_postprocessor.postprocess_monograph,  # TODO: periodical
+        func=mods_postprocessor.postprocess_periodical,
         uuid=uuid
     )
 
