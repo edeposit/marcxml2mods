@@ -10,15 +10,13 @@ from monograph import add_uuid
 from monograph import add_xml_declaration
 from monograph import add_missing_xml_attributes
 
+from shared_funcs import double_linked_dom
+
 
 # Functions & classes =========================================================
 @add_xml_declaration
 def postprocess_multi_mono(mods, uuid, counter):
-    # do not parse already parsed dom's
-    dom = mods
-    if not isinstance(mods, dhtmlparser.HTMLElement):
-        dom = dhtmlparser.parseString(mods)
-    dhtmlparser.makeDoubleLinked(dom)
+    dom = double_linked_dom(mods)
 
     add_missing_xml_attributes(dom, counter)
 

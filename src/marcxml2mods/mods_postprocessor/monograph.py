@@ -9,6 +9,7 @@ from remove_hairs import remove_hairs
 
 from shared_funcs import insert_tag
 from shared_funcs import transform_content
+from shared_funcs import double_linked_dom
 
 
 # Functions & objects =========================================================
@@ -269,14 +270,9 @@ def postprocess_monograph(mods, uuid, counter):
     Returns:
         str: Updated XML.
     """
-    # do not parse already parsed dom's
-    dom = mods
-    if not isinstance(mods, dhtmlparser.HTMLElement):
-        dom = dhtmlparser.parseString(mods)
-    dhtmlparser.makeDoubleLinked(dom)
+    dom = double_linked_dom(mods)
 
     add_missing_xml_attributes(dom, counter)
-
     fix_invalid_type_parameter(dom)
 
     if uuid:

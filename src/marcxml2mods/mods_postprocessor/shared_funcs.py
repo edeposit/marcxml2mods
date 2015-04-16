@@ -51,3 +51,25 @@ def transform_content(tags, content_transformer):
         tag.childs = [
             dhtmlparser.HTMLElement(content_transformer(tag))
         ]
+
+
+def double_linked_dom(str_or_dom):
+    """
+    Create double linked DOM from input.
+
+    In case of string, parse it, make it double-linked. In case of DOM, just
+    make it double-linked.
+
+    Args:
+        str_or_dom (str/HTMLelement): String or HTMLelement instance.
+
+    Returns:
+        obj: HTMLelement with parsed, double-linked content from `str_or_dom`.
+    """
+    dom = str_or_dom
+    if not isinstance(str_or_dom, dhtmlparser.HTMLElement):
+        dom = dhtmlparser.parseString(str_or_dom)
+
+    dhtmlparser.makeDoubleLinked(dom)
+
+    return dom
