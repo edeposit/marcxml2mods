@@ -4,31 +4,38 @@
 # Interpreter version: python 2.7
 #
 # Imports =====================================================================
+from os.path import join
+from os.path import dirname
+
+import pytest
 import dhtmlparser
 
 from marcxml2mods import transformators
 from marcxml2mods import xslt_transformer
 from marcxml2mods import mods_postprocessor
 
-import test_xslt_transformer
-
 
 # Variables ===================================================================
-POSTPROCESSED_FN = test_xslt_transformer.DIRNAME + "postprocessed_mods.xml"
+DIRNAME = join(dirname(dirname(__file__)), "data")
+OAI_FILENAME = join(DIRNAME, "oai_example.oai")
+
+
+@pytest.fixture
+def postprocessed():
+    fn = join(DIRNAME, "postprocessed_mods.xml")
+
+    with open(fn) as f:
+        return f.read()
 
 
 # Tests =======================================================================
-def test_postprocess_mods():
-    result = transformators.transform_to_mods_mono(
-        test_xslt_transformer.OAI_FILENAME,
-        "someid"
-    )
+def test_postprocess_mods(postprocessed):
+    result = transformators.transform_to_mods_mono(OAI_FILENAME, "someid")
 
     # with open("xex.xml", "wt") as f:
         # f.write(result[0])
 
-    with open(POSTPROCESSED_FN) as f:
-        assert result[0] == f.read()
+    assert result[0] == postprocessed
 
 
 def test_fix_location_tag():
