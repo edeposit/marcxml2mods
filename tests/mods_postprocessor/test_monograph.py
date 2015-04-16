@@ -12,7 +12,7 @@ import dhtmlparser
 
 from marcxml2mods import transformators
 from marcxml2mods import xslt_transformer
-from marcxml2mods import mods_postprocessor
+from marcxml2mods.mods_postprocessor import monograph
 
 
 # Variables ===================================================================
@@ -29,7 +29,7 @@ def postprocessed():
 
 
 # Tests =======================================================================
-def test_postprocess_mods(postprocessed):
+def test_postprocess_mods_mono(postprocessed):
     result = transformators.transform_to_mods_mono(OAI_FILENAME, "someid")
 
     # with open("xex.xml", "wt") as f:
@@ -61,7 +61,7 @@ def test_fix_location_tag():
     dom = dhtmlparser.parseString(XML)
     dhtmlparser.makeDoubleLinked(dom)
 
-    mods_postprocessor.monograph.fix_location_tag(dom)
+    monograph.fix_location_tag(dom)
 
     assert dom.__str__() == """
 <mods:mods>
@@ -103,7 +103,7 @@ def test_fix_related_item_tag():
     dom = dhtmlparser.parseString(XML)
     dhtmlparser.makeDoubleLinked(dom)
 
-    mods_postprocessor.monograph.fix_related_item_tag(dom)
+    monograph.fix_related_item_tag(dom)
 
     assert dom.prettify() == """<mods:mods>
   <mods:identifier type="ccnb">cnb000003024</mods:identifier>
