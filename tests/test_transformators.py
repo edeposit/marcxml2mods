@@ -42,6 +42,7 @@ def test_transform_to_mods_mono(mono_example):
 
 def test_marcxml2mods(mono_example):
     result = transformators.marcxml2mods(OAI_FILENAME, "someid")
+    # TODO: Add tests for each type of document
 
     assert result
     assert result[0] == mono_example
