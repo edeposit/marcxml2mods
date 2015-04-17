@@ -48,13 +48,13 @@ def add_missing_xml_attributes(dom, volume_counter=0):
         params["xmlns:mods"] = "http://www.loc.gov/mods/v3"
         params["xmlns:xlink"] = "http://www.w3.org/1999/xlink"
         params["xmlns:xsi"] = "http://www.w3.org/2001/XMLSchema-instance"
-        params["xsi:schemaLocation"] = (
-            "http://www.w3.org/2001/XMLSchema-instance "
-            "http://www.w3.org/2001/XMLSchema.xsd "
-            "http://www.loc.gov/mods/v3 "
-            "http://www.loc.gov/standards/mods/v3/mods-3-4.xsd "
-            "http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd"
-        )
+        params["xsi:schemaLocation"] = " ".join((
+            "http://www.w3.org/2001/XMLSchema-instance",
+            "http://www.w3.org/2001/XMLSchema.xsd",
+            "http://www.loc.gov/mods/v3",
+            "http://www.loc.gov/standards/mods/v3/mods-3-4.xsd",
+            "http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd",
+        ))
 
 
 def fix_invalid_type_parameter(dom):

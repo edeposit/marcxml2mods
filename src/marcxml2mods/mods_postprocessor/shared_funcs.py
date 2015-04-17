@@ -24,6 +24,10 @@ def insert_tag(tag, before, root):
 
     before = before[0] if type(before) in [tuple, list] else before
 
+    # check that `before` is double linked
+    if not hasattr(before, "parent"):
+        raise ValueError("Input must be double-linked!")
+
     # put it before first existing identifier
     parent = before.parent
     parent.childs.insert(
@@ -48,9 +52,13 @@ def transform_content(tags, content_transformer):
         tags = [tags]
 
     for tag in tags:
-        tag.childs = [
-            dhtmlparser.HTMLElement(content_transformer(tag))
-        ]
+        new_child = dhtmlparser.HTMLElement(content_transformer(tag))
+
+        # don't forget to add parent if the list is double-linked
+        if hasattr(tag, "parent"):
+            new_child.parent = tag
+
+        tag.childs = [new_child]
 
 
 def double_linked_dom(str_or_dom):
