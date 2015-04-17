@@ -13,6 +13,7 @@ import dhtmlparser
 from marcxml2mods import transformators
 from marcxml2mods import xslt_transformer
 from marcxml2mods.mods_postprocessor import monograph
+from marcxml2mods.mods_postprocessor import shared_funcs
 
 
 # Variables ===================================================================
@@ -57,9 +58,7 @@ def test_fix_location_tag():
   <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
 </mods:mods>
     """
-
-    dom = dhtmlparser.parseString(XML)
-    dhtmlparser.makeDoubleLinked(dom)
+    dom = shared_funcs.double_linked_dom(XML)
 
     monograph.fix_location_tag(dom)
 
@@ -99,9 +98,7 @@ def test_fix_related_item_tag():
   <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
 </mods:mods>
     """
-
-    dom = dhtmlparser.parseString(XML)
-    dhtmlparser.makeDoubleLinked(dom)
+    dom = shared_funcs.double_linked_dom(XML)
 
     monograph.fix_related_item_tag(dom)
 
@@ -110,5 +107,31 @@ def test_fix_related_item_tag():
   <mods:identifier type="uuid">236b6283-22d1-4014-ae50-a303cfd15419</mods:identifier>
   <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
     <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
+</mods:mods>
+"""
+
+
+def test_add_marccountry_tag():
+    XML = """<mods:mods>
+  <mods:originInfo>
+    <mods:place>
+      <mods:placeTerm type="text">Brno</mods:placeTerm>
+    </mods:place>
+  </mods:originInfo>
+</mods:mods>
+"""
+    dom = shared_funcs.double_linked_dom(XML)
+
+    monograph.add_marccountry_tag(dom)
+
+    assert dom.prettify() == """<mods:mods>
+  <mods:originInfo>
+    <mods:place>
+      <mods:placeTerm type="code" authority="marccountry">xr-</mods:placeTerm>
+    </mods:place>
+    <mods:place>
+      <mods:placeTerm type="text">Brno</mods:placeTerm>
+    </mods:place>
+  </mods:originInfo>
 </mods:mods>
 """
