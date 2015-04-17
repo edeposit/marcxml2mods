@@ -208,7 +208,8 @@ def fix_location_tag(dom):
         if not urls:
             return
 
-        url = max(urls, key=lambda x: len(x))
+        url_tag = max(urls, key=lambda x: len(x.getContent()))
+        url = url_tag.getContent()
 
     # replace the code with new tag
     replacer = dhtmlparser.parseString("""
