@@ -6,3 +6,7 @@ MANIFEST
 *.html
 src/marcxml2mods/aleph
 src/marcxml2mods/decoders/aleph
+
+# coverage files
+.coverage
+htmlcov/
