@@ -1,3 +1,3 @@
 #! /usr/bin/env sh
 
-../../edeposit.amqp.ftp/docs/uml_templater.py -i ../src/edeposit/amqp/ltp/ _static/
+../../uml_templater/uml_templater.py -i ../src/marcxml2mods/ _static/
