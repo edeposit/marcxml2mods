@@ -7,9 +7,13 @@ to MODS format.
 Package structure
 -----------------
 
+Relations between files in this package are captured at following image:
+
+.. image:: /_static/relations.png
+    :width: 600px
 
 API
----
++++
 :doc:`/api/marcxml2mods`:
 
 .. toctree::
@@ -39,9 +43,6 @@ API
     /api/xslt/MARC21toMultiMonographTitle.rst
     /api/xslt/MARC21toPeriodicalTitle.rst
 
-
-Usage example
--------------
 
 Installation
 ============
