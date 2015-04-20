@@ -30,12 +30,15 @@ API
     /api/mods_postprocessor/shared_funcs.rst
 
 
-:doc:`/api/tools/tools`:
+:doc:`/api/xslt/xslt`:
 
 .. toctree::
     :maxdepth: 1
 
-    /api/tools/resorted.rst
+    /api/xslt/MARC21slim2MODS3-4-NDK.rst
+    /api/xslt/MARC21toMultiMonographTitle.rst
+    /api/xslt/MARC21toPeriodicalTitle.rst
+
 
 Usage example
 -------------
