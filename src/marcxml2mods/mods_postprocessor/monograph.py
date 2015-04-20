@@ -4,6 +4,8 @@
 # Interpreter version: python 2.7
 #
 # Imports =====================================================================
+from functools import wraps
+
 import dhtmlparser
 from remove_hairs import remove_hairs
 
@@ -14,6 +16,10 @@ from shared_funcs import double_linked_dom
 
 # Functions & objects =========================================================
 def add_xml_declaration(fn):
+    """
+    Decorator to add header with XML version declaration to output from FN.
+    """
+    @wraps(fn)
     def add_xml_declaration_decorator(*args, **kwargs):
         return '<?xml version="1.0" encoding="UTF-8"?>\n\n' + fn(
             *args,

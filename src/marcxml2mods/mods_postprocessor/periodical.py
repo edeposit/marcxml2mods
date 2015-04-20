@@ -4,8 +4,6 @@
 # Interpreter version: python 2.7
 #
 # Imports =====================================================================
-import dhtmlparser
-
 from monograph import add_uuid
 from monograph import add_xml_declaration
 from monograph import add_missing_xml_attributes
