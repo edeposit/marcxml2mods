@@ -8,6 +8,7 @@ import os
 import os.path
 import lxml.etree as ET
 
+import pytest
 import dhtmlparser
 
 from marcxml2mods import xslt_transformer
@@ -106,6 +107,11 @@ def test_read_marcxml_fn():
     assert "<record" in marc_xml
     assert "<datafield" in marc_xml
     assert "<subfield" in marc_xml
+
+
+def test_read_content_or_path():
+    with pytest.raises(IOError):
+        xslt_transformer._read_content_or_path("/dev/azgabash")
 
 
 def test_read_template():
