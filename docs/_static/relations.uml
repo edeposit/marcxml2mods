@@ -18,30 +18,42 @@ package mods_postprocessor {
     class mp_init as "_​_init__.py" <<M, Red>> {
         Used to fix data after XSLT templates.
 
-        $templater:module:mods_postprocessor/__init__
     }
     class shared_funcs as "shared_funcs.py" <<M, Red>> {
         Functions shared in mods_postprocessor/ module.
 
-        $templater:module:mods_postprocessor/shared_funcs
+        insert_tag(tag, before, root)
+        transform_content(tags, content_transformer)
+        double_linked_dom(str_or_dom)
     }
     class monograph as "monograph.py" <<M, Red>> {
         Functions used to postprocess Monograph
         MODS XML.
 
-        $templater:module:mods_postprocessor/monograph
+        add_xml_declaration(fn)
+        get_mods_tag(dom)
+        add_missing_xml_attributes(dom, volume_counter)
+        fix_invalid_type_parameter(dom)
+        add_uuid(dom, uuid)
+        add_marccountry_tag(dom)
+        add_genre(dom)
+        remove_hairs_from_tags(dom)
+        fix_issuance(dom)
+        fix_location_tag(dom)
+        fix_related_item_tag(dom)
+        postprocess_monograph(mods, uuid, counter)
     }
     class multi_mono as "multi_monograph.py" <<M, Red>> {
         Functions used to postprocess Multimono
         MODS XML.
 
-        $templater:module:mods_postprocessor/multi_monograph
+        postprocess_multi_mono(mods, uuid, counter)
     }
     class periodical as "periodical.py" <<M, Red>> {
         Functions used to postprocess Periodical
         MODS XML.
 
-        $templater:module:mods_postprocessor/periodical
+        postprocess_periodical(mods, uuid, counter)
     }
 }
 
@@ -49,13 +61,16 @@ class xslt_transformer as "xslt_transformer.py" <<M, Red>> {
     Used to convert data using XSLT
     templates.
 
-    $templater:module:xslt_transformer
+    xslt_transformation(xml, template)
 }
 
 class transformators as "transformators.py" <<M, Red>> {
     Used to transform Aleph's metadata to MODS.
 
-    $templater:module:transformators
+    transform_to_mods_mono(marc_xml, uuid)
+    transform_to_mods_multimono(marc_xml, uuid)
+    transform_to_mods_periodical(marc_xml, uuid)
+    marcxml2mods(marc_xml, uuid)
 }
 
 class init as "_​_init__.py" <<M, Red>> {
