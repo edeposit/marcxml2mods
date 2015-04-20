@@ -85,12 +85,15 @@ def _read_content_or_path(content_or_path):
 
     Returns:
         str: Content.
+
+    Raises:
+        IOError: whhen the file is not found.
     """
     if "\n" in content_or_path.strip():
         return content_or_path
 
     if not os.path.exists(content_or_path):
-        raise UserWarning("File '%s' doesn't exists!" % content_or_path)
+        raise IOError("File '%s' doesn't exists!" % content_or_path)
 
     with open(content_or_path) as f:
         return f.read()
