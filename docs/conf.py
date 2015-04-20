@@ -11,10 +11,6 @@ sys.path.insert(0, os.path.abspath('../src/'))
 
 extensions = [
     'sphinx.ext.autodoc',
-    'sphinx.ext.graphviz',
-    'sphinx.ext.todo',
-    'sphinx.ext.coverage',
-    'sphinx.ext.viewcode',
     'sphinxcontrib.napoleon',
     'sphinx.ext.intersphinx'
 ]
