@@ -16,7 +16,7 @@ long_description = "\n\n".join([
 setup(
     name='marcxml2mods',
     version=getVersion(changelog),
-    description="Module for conversion from MARC XML / OAI to MODS.",
+    description="Module for conversion from MARC XML / OAI to MODS used in NK CZ.",
     long_description=long_description,
     url='https://github.com/edeposit/marcxml2mods',
 
