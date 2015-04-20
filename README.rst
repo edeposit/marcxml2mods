@@ -6,12 +6,14 @@ Introduction
 
 .. image:: https://pypip.in/d/marcxml2mods/badge.png
 
-This package provides functions for conversion from `MARC XML`_ / `OAI`_ format
-to MODS_ XML format.
+This package provides conversion functions to convert data from
+`MARC XML`_ / `OAI`_ format to MODS_ XML format used in
+`National Library of the Czech Republic`_ (NK CZ).
 
 .. _MARC XML: http://www.loc.gov/marc/marcxml.html
 .. _OAI: http://www.openarchives.org/OAI/2.0/guidelines-oai_marc.htm
 .. _MODS: http://www.loc.gov/standards/mods/
+.. _National Library of the Czech Republic: http://www.nkp.cz/
 
 
 Documentation
