@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.2.1
+-----
+    - Fixed run_tests.sh.
+    - License changed to MIT.
+
 0.2.0
 -----
     - Added code, documentation and test coverage.
