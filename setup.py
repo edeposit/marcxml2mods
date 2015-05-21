@@ -1,32 +1,45 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
+#
+# Interpreter version: python 2.7
+#
+# Imports =====================================================================
 from setuptools import setup, find_packages
 
 from docs import getVersion
 
 
-changelog = open('CHANGES.rst').read()
-long_description = "\n\n".join([
+# Variables ===================================================================
+CHANGELOG = open('CHANGES.rst').read()
+LONG_DESCRIPTION = "\n\n".join([
     open('README.rst').read(),
     open('CONTRIBUTORS.rst').read(),
-    changelog
+    CHANGELOG
 ])
 
 
+# Functions ===================================================================
 setup(
     name='marcxml2mods',
-    version=getVersion(changelog),
-    description="Module for conversion from MARC XML / OAI to MODS used in NK CZ.",
-    long_description=long_description,
+    version=getVersion(CHANGELOG),
+    description="Conversion from MARCXML/OAI to MODS, which is used in NK CZ.",
+    long_description=LONG_DESCRIPTION,
     url='https://github.com/edeposit/marcxml2mods',
 
     author='Edeposit team',
     author_email='edeposit@email.cz',
 
     classifiers=[
-        "Programming Language :: Python :: 2.7",
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+
         "License :: OSI Approved :: MIT License",
-        "Topic :: Software Development :: Libraries :: Python Modules"
+
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 2.7",
+
+        "Topic :: Text Processing :: Markup :: XML",
+        "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     license='MIT',
 

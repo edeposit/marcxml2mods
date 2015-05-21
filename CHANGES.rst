@@ -5,6 +5,7 @@ Changelog
 -----
     - Fixed run_tests.sh.
     - License changed to MIT.
+    - setup.py improved. Added more classifiers.
 
 0.2.0
 -----
