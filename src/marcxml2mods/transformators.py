@@ -121,6 +121,41 @@ def transform_to_mods_periodical(marc_xml, uuid):
     )
 
 
+def type_decisioner(marc_xml, mono_callback, multimono_callback,
+                    periodical_callback):
+    """
+    Detect type of the `marc_xml`. Call proper callback.
+
+    Args:
+        marc_xml (str): Filename or XML string. Don't use ``\\n`` in case of
+                        filename.
+        mono_callback (fn reference): Callback in case of monographic
+                      publications.
+        multimono_callback (fn reference): Callback used in case of
+                           multi-monographic publications.
+        periodical_callback (fn reference): Callback used in case of periodical
+                            publications.
+
+    Returns:
+        obj: Content returned by the callback.
+
+    Raises:
+        ValueError: In case that type couldn't be detected.
+    """
+    record = MARCXMLRecord(
+        _read_content_or_path(marc_xml)
+    )
+
+    if record.is_monographic or record.is_single_unit:
+        return mono_callback()
+    elif record.is_multi_mono:
+        return multimono_callback()
+    elif record.is_continuing:
+        return periodical_callback()
+
+    raise ValueError("Can't identify type of the `marc_xml`!")
+
+
 def marcxml2mods(marc_xml, uuid):
     """
     Convert `marc_xml` to MODS. Decide type of the record and what template to
@@ -134,15 +169,9 @@ def marcxml2mods(marc_xml, uuid):
     Returns:
         list: Collection of transformed xml strings.
     """
-    record = MARCXMLRecord(
-        _read_content_or_path(marc_xml)
+    return type_decisioner(
+        marc_xml,
+        lambda: transform_to_mods_mono(marc_xml, uuid),
+        lambda: transform_to_mods_multimono(marc_xml, uuid),
+        lambda: transform_to_mods_periodical(marc_xml, uuid),
     )
-
-    if record.is_monographic or record.is_single_unit:
-        return transform_to_mods_mono(marc_xml, uuid)
-    elif record.is_multi_mono:
-        return transform_to_mods_multimono(marc_xml, uuid)
-    elif record.is_continuing:
-        return transform_to_mods_periodical(marc_xml, uuid)
-
-    raise ValueError("Can't identify type of the `marc_xml`!")
