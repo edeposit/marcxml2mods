@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.2.2
+-----
+    - Added type_decisioner.
+    - Added skipping of duplicite parsing to _add_namespace().
+
 0.2.1
 -----
     - Fixed run_tests.sh.

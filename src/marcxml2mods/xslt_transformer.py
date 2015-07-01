@@ -51,9 +51,10 @@ def _add_namespace(marc_xml):
     Returns:
         str: XML with namespace.
     """
-    # return marcxml
-    dom = dhtmlparser.parseString(marc_xml)
-    collections = dom.find("collection")
+    dom = marc_xml
+
+    if isinstance(dom, basestring):
+        dom = dhtmlparser.parseString(marc_xml)
 
     root = dom.find("root")
     if root:
@@ -62,6 +63,7 @@ def _add_namespace(marc_xml):
     for record in dom.find("record"):
         record.params = {}
 
+    collections = dom.find("collection")
     if not collections:
         record = dom.find("record")[0]
         return XML_TEMPLATE.replace("$CONTENT", str(record))
@@ -113,6 +115,7 @@ def _read_marcxml(xml):
     """
     # read file, if `xml` is valid file path
     marc_xml = _read_content_or_path(xml)
+
 
     # process input file - convert it from possible OAI to MARC XML and add
     # required XML namespaces
