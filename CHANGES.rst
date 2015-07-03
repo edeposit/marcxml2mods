@@ -1,6 +1,10 @@
 Changelog
 =========
 
+0.2.3
+-----
+    - Fixed MANIFEST.in
+
 0.2.2
 -----
     - Added type_decisioner.
