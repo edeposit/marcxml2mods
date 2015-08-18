@@ -6,6 +6,8 @@
 # Imports =====================================================================
 import os
 import os.path
+from lxml import etree
+from lxml import isoschematron
 
 import pytest
 
@@ -27,6 +29,17 @@ def get_test_file_content(fn):
         return f.read()
 
 
+def validity_test(xml):
+    xsd_doc = etree.parse(get_test_data_context("mods-3-4.xsd"))
+    xsd = etree.XMLSchema(xsd_doc)
+    xml = etree.fromstring(xml)
+    result = xsd.validate(xml)
+
+    if result == 0:
+        raise ValueError(xsd.error_log.filter_from_errors()[0])
+
+
+# Fixtures ====================================================================
 @pytest.fixture
 def mono_example():
     return get_test_file_content("postprocessed_mods.xml")
@@ -39,6 +52,8 @@ def test_transform_to_mods_mono(mono_example):
     assert result
     assert result[0] == mono_example
 
+    validity_test(result[0])
+
 
 def test_marcxml2mods(mono_example):
     result = transformators.marcxml2mods(OAI_FILENAME, "someid")
@@ -46,3 +61,5 @@ def test_marcxml2mods(mono_example):
 
     assert result
     assert result[0] == mono_example
+
+    validity_test(result[0])
