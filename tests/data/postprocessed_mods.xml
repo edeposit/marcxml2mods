@@ -66,7 +66,11 @@
   <mods:classification authority="udc">004.42</mods:classification>
   <mods:classification authority="udc">(035)</mods:classification>
   <mods:location>
-    <mods:physicalLocation authority="siglaADR">ABA001</mods:physicalLocation>
+    <mods:holdingSimple>
+      <mods:copyInformation>
+        <mods:electronicLocator>http://kitakitsune.org/raw</mods:electronicLocator>
+      </mods:copyInformation>
+    </mods:holdingSimple>
   </mods:location>
   <mods:relatedItem type="otherVersion">
     <mods:titleInfo>

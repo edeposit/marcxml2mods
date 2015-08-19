@@ -19,6 +19,7 @@ from marcxml2mods.mods_postprocessor import shared_funcs
 # Variables ===================================================================
 DIRNAME = join(dirname(dirname(__file__)), "data")
 OAI_FILENAME = join(DIRNAME, "oai_example.oai")
+URL = "http://kitakitsune.org/raw"
 
 
 @pytest.fixture
@@ -31,7 +32,7 @@ def postprocessed():
 
 # Tests =======================================================================
 def test_postprocess_mods_mono(postprocessed):
-    result = transformators.transform_to_mods_mono(OAI_FILENAME, "someid")
+    result = transformators.transform_to_mods_mono(OAI_FILENAME, "someid", URL)
 
     # with open("xex.xml", "wt") as f:
         # f.write(result[0])
@@ -202,3 +203,46 @@ def test_add_marccountry_tag():
   </mods:originInfo>
 </mods:mods>
 """
+
+
+def test_fix_missing_electronic_locator_tag():
+    XML = """
+<mods:mods>
+  <mods:identifier type="ccnb">cnb000003024</mods:identifier>
+  <mods:location>
+    <mods:physicalLocation authority="siglaADR">ABA001</mods:physicalLocation>
+  </mods:location>
+  <mods:identifier type="uuid">236b6283-22d1-4014-ae50-a303cfd15419</mods:identifier>
+  <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
+  <mods:relatedItem>
+    <mods:location>
+      <mods:url>http://edeposit.nkp.cz/</mods:url>
+    </mods:location>
+  </mods:relatedItem>
+  <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
+</mods:mods>
+    """
+    dom = shared_funcs.double_linked_dom(XML)
+
+    monograph.fix_missing_electronic_locator_tag(dom, "http://kitakitsune.org")
+
+    assert dom.__str__() == """
+<mods:mods>
+  <mods:identifier type="ccnb">cnb000003024</mods:identifier>
+  <mods:location>
+    <mods:holdingSimple>
+      <mods:copyInformation>
+        <mods:electronicLocator>http://kitakitsune.org</mods:electronicLocator>
+      </mods:copyInformation>
+    </mods:holdingSimple>
+  </mods:location>
+  <mods:identifier type="uuid">236b6283-22d1-4014-ae50-a303cfd15419</mods:identifier>
+  <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
+  <mods:relatedItem>
+    <mods:location>
+      <mods:url>http://edeposit.nkp.cz/</mods:url>
+    </mods:location>
+  </mods:relatedItem>
+  <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
+</mods:mods>
+    """

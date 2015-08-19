@@ -22,7 +22,8 @@ def insert_tag(tag, before, root):
         tag.parent = root
         return
 
-    before = before[0] if type(before) in [tuple, list] else before
+    if type(before) in [tuple, list]:
+        before = before[0]
 
     # check that `before` is double linked
     if not hasattr(before, "parent"):
