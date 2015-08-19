@@ -222,11 +222,11 @@ def fix_location_tag(dom):
   <mods:location>
     <mods:holdingSimple>
       <mods:copyInformation>
-        <mods:electronicLocator>%s</mods:electronicLocator>
+        <mods:electronicLocator>""" + url + """</mods:electronicLocator>
       </mods:copyInformation>
     </mods:holdingSimple>
   </mods:location>
-    """ % url)
+    """)
 
     location.replaceWith(
         replacer.find("mods:location")[0]
@@ -265,8 +265,56 @@ def fix_related_item_tag(dom):
         related_item.replaceWith(dhtmlparser.HTMLElement())
 
 
+def fix_missing_electronic_locator_tag(dom, url):
+    """
+    In case that MODS contains no URL and the location is wrong (physical), add
+    url from `url` parameter.
+    """
+    electronic_locator = dom.match(
+        "mods:mods",
+        "mods:location",
+        "mods:holdingSimple",
+        "mods:copyInformation",
+        "mods:electronicLocator",
+    )
+    # do not try to fix correct records
+    if electronic_locator:
+        return
+
+    # if no location tag found, add it
+    location = dom.match("mods:mods", "mods:location")
+    if location:
+        location = location[0]
+    else:
+        location_tag = dhtmlparser.parseString(
+            "<mods:location></mods:location>"
+        )
+
+        insert_tag(
+            location_tag,
+            dom.find("mods:recordInfo"),
+            dom.find("mods:mods")
+        )
+
+        location = dom.match("mods:mods", "mods:location")[0]
+
+    replacer = dhtmlparser.parseString("""
+  <mods:location>
+    <mods:holdingSimple>
+      <mods:copyInformation>
+        <mods:electronicLocator>""" + url + """</mods:electronicLocator>
+      </mods:copyInformation>
+    </mods:holdingSimple>
+  </mods:location>
+    """)
+
+    location.replaceWith(
+        replacer.find("mods:location")[0]
+    )
+
+
 @add_xml_declaration
-def postprocess_monograph(mods, uuid, counter):
+def postprocess_monograph(mods, uuid, counter, url):
     """
     Fix bugs in `mods` produced by XSLT template.
 
@@ -297,5 +345,7 @@ def postprocess_monograph(mods, uuid, counter):
     fix_issuance(dom)
     fix_location_tag(dom)
     fix_related_item_tag(dom)
+
+    fix_missing_electronic_locator_tag(dom, url)
 
     return dom.prettify()
