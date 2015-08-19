@@ -53,7 +53,7 @@ setup(
     install_requires=[
         "lxml",
         "xmltodict",
-        "pydhtmlparser>=2.0.9",
+        "pydhtmlparser>=2.1.4",
         "marcxml_parser",
         "remove_hairs",
     ],
