@@ -37,6 +37,7 @@ def _apply_postprocessing(xml, func, uuid, url):
         xml (str): XML which will be postprocessed.
         func (fn): Function, which will be used for postprocessing.
         uuid (str): UUID, which will be inserted to `xml`.
+        url (str): URL of the publication (public or not).
 
     Returns:
         list: List of string with postprocessed XML.
@@ -57,6 +58,7 @@ def transform_to_mods_mono(marc_xml, uuid, url):
         marc_xml (str): Filename or XML string. Don't use ``\\n`` in case of
                         filename.
         uuid (str): UUID string giving the package ID.
+        url (str): URL of the publication (public or not).
 
     Returns:
         list: Collection of transformed xml strings.
@@ -82,6 +84,7 @@ def transform_to_mods_multimono(marc_xml, uuid, url):
         marc_xml (str): Filename or XML string. Don't use ``\\n`` in case of
                         filename.
         uuid (str): UUID string giving the package ID.
+        url (str): URL of the publication (public or not).
 
     Returns:
         list: Collection of transformed xml strings.
@@ -107,6 +110,7 @@ def transform_to_mods_periodical(marc_xml, uuid, url):
         marc_xml (str): Filename or XML string. Don't use ``\\n`` in case of
                         filename.
         uuid (str): UUID string giving the package ID.
+        url (str): URL of the publication (public or not).
 
     Returns:
         list: Collection of transformed xml strings.
@@ -168,6 +172,7 @@ def marcxml2mods(marc_xml, uuid, url):
         marc_xml (str): Filename or XML string. Don't use ``\\n`` in case of
                         filename.
         uuid (str): UUID string giving the package ID.
+        url (str): URL of the publication (public or not).
 
     Returns:
         list: Collection of transformed xml strings.
