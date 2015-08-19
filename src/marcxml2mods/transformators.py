@@ -29,7 +29,7 @@ def _absolute_template_path(fn):
     return os.path.join(os.path.dirname(__file__), "xslt", fn)
 
 
-def _apply_postprocessing(xml, func, uuid):
+def _apply_postprocessing(xml, func, uuid, url):
     """
     Apply `func` to all ``<mods:mods>`` tags from `xml`. Insert UUID.
 
@@ -44,12 +44,12 @@ def _apply_postprocessing(xml, func, uuid):
     dom = dhtmlparser.parseString(xml)
 
     return [
-        func(mods_tag, uuid, cnt)
+        func(mods_tag, uuid, cnt, url)
         for cnt, mods_tag in enumerate(dom.find("mods:mods"))
     ]
 
 
-def transform_to_mods_mono(marc_xml, uuid):
+def transform_to_mods_mono(marc_xml, uuid, url):
     """
     Convert `marc_xml` to MODS data format.
 
@@ -69,11 +69,12 @@ def transform_to_mods_mono(marc_xml, uuid):
     return _apply_postprocessing(
         xml=transformed,
         func=mods_postprocessor.postprocess_monograph,
-        uuid=uuid
+        uuid=uuid,
+        url=url,
     )
 
 
-def transform_to_mods_multimono(marc_xml, uuid):
+def transform_to_mods_multimono(marc_xml, uuid, url):
     """
     Convert `marc_xml` to multimonograph MODS data format.
 
@@ -93,11 +94,12 @@ def transform_to_mods_multimono(marc_xml, uuid):
     return _apply_postprocessing(
         xml=transformed,
         func=mods_postprocessor.postprocess_multi_mono,
-        uuid=uuid
+        uuid=uuid,
+        url=url,
     )
 
 
-def transform_to_mods_periodical(marc_xml, uuid):
+def transform_to_mods_periodical(marc_xml, uuid, url):
     """
     Convert `marc_xml` to periodical MODS data format.
 
@@ -117,7 +119,8 @@ def transform_to_mods_periodical(marc_xml, uuid):
     return _apply_postprocessing(
         xml=transformed,
         func=mods_postprocessor.postprocess_periodical,
-        uuid=uuid
+        uuid=uuid,
+        url=url,
     )
 
 
@@ -156,7 +159,7 @@ def type_decisioner(marc_xml, mono_callback, multimono_callback,
     raise ValueError("Can't identify type of the `marc_xml`!")
 
 
-def marcxml2mods(marc_xml, uuid):
+def marcxml2mods(marc_xml, uuid, url):
     """
     Convert `marc_xml` to MODS. Decide type of the record and what template to
     use (monograph, multi-monograph, periodical).
@@ -171,7 +174,7 @@ def marcxml2mods(marc_xml, uuid):
     """
     return type_decisioner(
         marc_xml,
-        lambda: transform_to_mods_mono(marc_xml, uuid),
-        lambda: transform_to_mods_multimono(marc_xml, uuid),
-        lambda: transform_to_mods_periodical(marc_xml, uuid),
+        lambda: transform_to_mods_mono(marc_xml, uuid, url),
+        lambda: transform_to_mods_multimono(marc_xml, uuid, url),
+        lambda: transform_to_mods_periodical(marc_xml, uuid, url),
     )

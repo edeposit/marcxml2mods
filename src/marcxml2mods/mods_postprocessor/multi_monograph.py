@@ -13,7 +13,7 @@ from shared_funcs import double_linked_dom
 
 # Functions & classes =========================================================
 @add_xml_declaration
-def postprocess_multi_mono(mods, uuid, counter):
+def postprocess_multi_mono(mods, uuid, counter, url):
     """
     Some basic postprocessing of the multi-monograph publications.
 

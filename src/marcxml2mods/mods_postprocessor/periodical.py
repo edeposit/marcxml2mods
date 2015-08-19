@@ -13,7 +13,7 @@ from shared_funcs import double_linked_dom
 
 # Functions & classes =========================================================
 @add_xml_declaration
-def postprocess_periodical(mods, uuid, counter):
+def postprocess_periodical(mods, uuid, counter, url):
     """
     Some basic postprocessing of the periodical publications.
 
