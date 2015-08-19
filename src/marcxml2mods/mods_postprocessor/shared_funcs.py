@@ -5,6 +5,7 @@
 #
 # Imports =====================================================================
 import dhtmlparser
+from dhtmlparser import first
 
 
 # Functions & classes =========================================================
@@ -23,7 +24,7 @@ def insert_tag(tag, before, root):
         return
 
     if type(before) in [tuple, list]:
-        before = before[0]
+        before = first(before)
 
     # check that `before` is double linked
     if not hasattr(before, "parent"):

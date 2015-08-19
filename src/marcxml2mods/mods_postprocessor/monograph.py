@@ -7,6 +7,7 @@
 from functools import wraps
 
 import dhtmlparser
+from dhtmlparser import first
 from remove_hairs import remove_hairs
 
 from shared_funcs import insert_tag
@@ -33,7 +34,7 @@ def get_mods_tag(dom):
     """
     Find and return HTMLElement with ``<mods:mods>`` tag from the `dom`.
     """
-    return dom.find("mods:mods")[0]
+    return first(dom.find("mods:mods"))
 
 
 def add_missing_xml_attributes(dom, volume_counter=0):
@@ -74,7 +75,7 @@ def fix_invalid_type_parameter(dom):
         ["mods:placeTerm", {"authority": "marccountry"}]
     )
     if placeterm_tag:
-        placeterm_tag[0].params["type"] = "code"
+        first(placeterm_tag).params["type"] = "code"
 
 
 def add_uuid(dom, uuid):
@@ -115,7 +116,7 @@ def add_marccountry_tag(dom):
     insert_tag(
         marccountry_tag,
         dom.match("mods:mods", "mods:originInfo", "mods:place"),
-        dom.find("mods:originInfo")[0]
+        first(dom.find("mods:originInfo"))
     )
 
 
@@ -194,7 +195,7 @@ def fix_location_tag(dom):
     # if no location tag found, there is nothing to be fixed
     if not location:
         return
-    location = location[0]
+    location = first(location)
 
     # fix only <mods:location> containing <mods:physicalLocation> tags
     if not location.find("mods:physicalLocation"):
@@ -204,7 +205,7 @@ def fix_location_tag(dom):
 
     # parse URL
     if url:
-        url = url[0].getContent()
+        url = first(url).getContent()
     else:
         urls = filter(
             lambda x: x.getContent(),
@@ -229,7 +230,7 @@ def fix_location_tag(dom):
     """)
 
     location.replaceWith(
-        replacer.find("mods:location")[0]
+        first(replacer.find("mods:location"))
     )
 
     dhtmlparser.makeDoubleLinked(dom)
@@ -248,7 +249,7 @@ def fix_related_item_tag(dom):
 
     if not location:
         return
-    location = location[0]
+    location = first(location)
 
     location.replaceWith(
         dhtmlparser.HTMLElement()
@@ -259,7 +260,7 @@ def fix_related_item_tag(dom):
         "mods:mods",
         "mods:relatedItem"
     )
-    related_item = related_item[0]
+    related_item = first(related_item)
 
     if not related_item.getContent().strip():
         related_item.replaceWith(dhtmlparser.HTMLElement())
@@ -284,7 +285,7 @@ def fix_missing_electronic_locator_tag(dom, url):
     # if no location tag found, add it
     location = dom.match("mods:mods", "mods:location")
     if location:
-        location = location[0]
+        location = first(location)
     else:
         location_tag = dhtmlparser.parseString(
             "<mods:location></mods:location>"
@@ -296,7 +297,7 @@ def fix_missing_electronic_locator_tag(dom, url):
             dom.find("mods:mods")
         )
 
-        location = dom.match("mods:mods", "mods:location")[0]
+        location = first(dom.match("mods:mods", "mods:location"))
 
     replacer = dhtmlparser.parseString("""
   <mods:location>
@@ -309,7 +310,7 @@ def fix_missing_electronic_locator_tag(dom, url):
     """)
 
     location.replaceWith(
-        replacer.find("mods:location")[0]
+        first(replacer.find("mods:location"))
     )
 
 
