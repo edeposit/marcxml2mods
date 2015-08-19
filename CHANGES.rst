@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.2.4
+-----
+    - Code rewritten to use first() getter.
+    - Added ``fix_missing_electronic_locator_tag()``.
+    - API changed, added `url` parameter.
+
 0.2.3
 -----
     - Fixed MANIFEST.in
