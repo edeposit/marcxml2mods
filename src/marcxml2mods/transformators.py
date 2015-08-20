@@ -29,11 +29,12 @@ def _absolute_template_path(fn):
     return os.path.join(os.path.dirname(__file__), "xslt", fn)
 
 
-def _apply_postprocessing(xml, func, uuid, url):
+def _apply_postprocessing(marc_xml, xml, func, uuid, url):
     """
     Apply `func` to all ``<mods:mods>`` tags from `xml`. Insert UUID.
 
     Args:
+        marc_xml (str): Original Aleph record.
         xml (str): XML which will be postprocessed.
         func (fn): Function, which will be used for postprocessing.
         uuid (str): UUID, which will be inserted to `xml`.
@@ -45,7 +46,7 @@ def _apply_postprocessing(xml, func, uuid, url):
     dom = dhtmlparser.parseString(xml)
 
     return [
-        func(mods_tag, uuid, cnt, url)
+        func(marc_xml, mods_tag, uuid, cnt, url)
         for cnt, mods_tag in enumerate(dom.find("mods:mods"))
     ]
 
@@ -69,6 +70,7 @@ def transform_to_mods_mono(marc_xml, uuid, url):
     )
 
     return _apply_postprocessing(
+        marc_xml=marc_xml,
         xml=transformed,
         func=mods_postprocessor.postprocess_monograph,
         uuid=uuid,
@@ -95,6 +97,7 @@ def transform_to_mods_multimono(marc_xml, uuid, url):
     )
 
     return _apply_postprocessing(
+        marc_xml=marc_xml,
         xml=transformed,
         func=mods_postprocessor.postprocess_multi_mono,
         uuid=uuid,
@@ -121,6 +124,7 @@ def transform_to_mods_periodical(marc_xml, uuid, url):
     )
 
     return _apply_postprocessing(
+        marc_xml=marc_xml,
         xml=transformed,
         func=mods_postprocessor.postprocess_periodical,
         uuid=uuid,
