@@ -315,6 +315,35 @@ def fix_missing_electronic_locator_tag(dom, url):
     )
 
 
+def fix_missing_lang_tags(marc_xml, dom):
+    """
+    If the lang tags are missing, add them to the MODS. Lang tags are parsed
+    from `marc_xml`.
+    """
+    def get_lang_tag(lang):
+        lang_str = '  <mods:language>\n'
+        lang_str += '    <mods:languageTerm authority="iso639-2b" type="code">'
+        lang_str += lang
+        lang_str += '</mods:languageTerm>\n'
+        lang_str += '  </mods:language>\n'
+
+        lang_dom = dhtmlparser.parseString(lang_str)
+
+        return first(lang_dom.find("mods:language"))
+
+    for lang in marc_xml["041a0 "]:
+        lang_tag = dom.find(
+            "mods:languageTerm",
+            fn=lambda x: x.getContent().strip().lower() == lang.lower()
+        )
+        if not lang_tag:
+            insert_tag(
+                get_lang_tag(lang),
+                dom.find("mods:language"),
+                dom.find("mods:mods")
+            )
+
+
 @add_xml_declaration
 def postprocess_monograph(marc_xml, mods, uuid, counter, url):
     """
@@ -354,5 +383,6 @@ def postprocess_monograph(marc_xml, mods, uuid, counter, url):
     fix_related_item_tag(dom)
 
     fix_missing_electronic_locator_tag(dom, url)
+    fix_missing_lang_tags(marc_xml, dom)
 
     return dom.prettify()
