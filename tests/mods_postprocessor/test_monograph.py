@@ -246,3 +246,47 @@ def test_fix_missing_electronic_locator_tag():
   <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
 </mods:mods>
     """
+
+
+def test_fix_missing_electronic_locator_tag():
+    OAI = """
+<record>
+<metadata>
+<oai_marc>
+<varfield id="041" i1="0" i2=" ">
+<subfield label="a">cze</subfield>
+<subfield label="a">eng</subfield>
+<subfield label="a">rus</subfield>
+</varfield>
+</oai_marc>
+</metadata>
+</record>
+    """
+
+    XML = """
+<mods:mods>
+  <mods:genre authority="czenas">sborníky konferencí</mods:genre>
+  <mods:genre authority="eczenas">proceedings of conferences</mods:genre>
+  <mods:genre>electronic volume</mods:genre>
+</mods:mods>
+    """
+    dom = shared_funcs.double_linked_dom(XML)
+
+    monograph.fix_missing_lang_tags(
+        monograph.MARCXMLRecord(OAI),
+        dom
+    )
+
+    assert dom.__str__() == """
+<mods:mods>
+  <mods:genre authority="czenas">sborníky konferencí</mods:genre>
+  <mods:genre authority="eczenas">proceedings of conferences</mods:genre>
+  <mods:genre>electronic volume</mods:genre>
+<mods:language>
+    <mods:languageTerm authority="iso639-2b" type="code">cze</mods:languageTerm>
+  </mods:language><mods:language>
+    <mods:languageTerm authority="iso639-2b" type="code">eng</mods:languageTerm>
+  </mods:language><mods:language>
+    <mods:languageTerm authority="iso639-2b" type="code">rus</mods:languageTerm>
+  </mods:language></mods:mods>
+    """

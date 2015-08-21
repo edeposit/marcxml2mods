@@ -1,0 +1,191 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<present>
+<record>
+<record_header>
+<set_entry>000000001</set_entry>
+</record_header>
+<doc_number>000003024</doc_number>
+<metadata>
+<oai_marc>
+<fixfield id="LDR">-----nam-a22------a-4500</fixfield>
+<fixfield id="FMT">BK</fixfield>
+<varfield id="BAS" i1=" " i2=" ">
+<subfield label="a">01</subfield>
+</varfield>
+<fixfield id="001">nkc20150003024</fixfield>
+<fixfield id="003">CZ-PrNK</fixfield>
+<fixfield id="005">20150224090043.0</fixfield>
+<fixfield id="007">ta</fixfield>
+<fixfield id="008">150211s2014----xr-a---e------100-0-cze--</fixfield>
+<varfield id="015" i1=" " i2=" ">
+<subfield label="a">cnb000003024</subfield>
+</varfield>
+<varfield id="020" i1=" " i2=" ">
+<subfield label="a">978-80-7408-086-9</subfield>
+<subfield label="q">(online :</subfield>
+<subfield label="q">pdf)</subfield>
+</varfield>
+<varfield id="040" i1=" " i2=" ">
+<subfield label="a">ABA001</subfield>
+<subfield label="b">cze</subfield>
+</varfield>
+<varfield id="041" i1="0" i2=" ">
+<subfield label="a">cze</subfield>
+<subfield label="a">eng</subfield>
+<subfield label="a">rus</subfield>
+</varfield>
+<varfield id="072" i1=" " i2="7">
+<subfield label="a">811.111</subfield>
+<subfield label="x">Angličtina</subfield>
+<subfield label="2">Konspekt</subfield>
+<subfield label="9">11</subfield>
+</varfield>
+<varfield id="080" i1=" " i2=" ">
+<subfield label="a">336</subfield>
+<subfield label="2">MRF</subfield>
+</varfield>
+<varfield id="080" i1=" " i2=" ">
+<subfield label="a">005</subfield>
+<subfield label="2">MRF</subfield>
+</varfield>
+<varfield id="080" i1=" " i2=" ">
+<subfield label="a">(062.534)</subfield>
+<subfield label="2">MRF</subfield>
+</varfield>
+<varfield id="111" i1="2" i2=" ">
+<subfield label="a">Controlling v MSP - nejen o číslech</subfield>
+<subfield label="d">(2014 :</subfield>
+<subfield label="c">Praha, Česko)</subfield>
+</varfield>
+<varfield id="245" i1="1" i2="0">
+<subfield label="a">Controlling v MSP - nejen o číslech :</subfield>
+<subfield label="b">sborník z mezinárodní vědecké konference : Praha, 25. dubna 2014, Vysoká škola finanční a správní = Controlling in SMEs - beyond numbers : proceedings of the international scientific conference : Prague, April 25th, 2014, University of Finance and Administration Prague /</subfield>
+<subfield label="c">[editor Dana Kubíčková]</subfield>
+</varfield>
+<varfield id="246" i1="3" i2="1">
+<subfield label="a">Controlling in SMEs - beyond numbers</subfield>
+</varfield>
+<varfield id="250" i1=" " i2=" ">
+<subfield label="a">1. vyd.</subfield>
+</varfield>
+<varfield id="260" i1=" " i2=" ">
+<subfield label="a">Praha :</subfield>
+<subfield label="b">Vysoká škola finanční a správní,</subfield>
+<subfield label="c">2014</subfield>
+</varfield>
+<varfield id="300" i1=" " i2=" ">
+<subfield label="a">1 online zdroj (515 s.) :</subfield>
+<subfield label="b">il. (některé barev.)</subfield>
+</varfield>
+<varfield id="504" i1=" " i2=" ">
+<subfield label="a">Obsahuje bibliografie</subfield>
+</varfield>
+<varfield id="546" i1=" " i2=" ">
+<subfield label="a">Český, anglický a ruský text</subfield>
+</varfield>
+<varfield id="650" i1="0" i2="7">
+<subfield label="a">finance</subfield>
+<subfield label="7">ph114548</subfield>
+<subfield label="2">czenas</subfield>
+</varfield>
+<varfield id="650" i1="0" i2="7">
+<subfield label="a">management</subfield>
+<subfield label="7">ph115217</subfield>
+<subfield label="2">czenas</subfield>
+</varfield>
+<varfield id="650" i1="0" i2="9">
+<subfield label="a">finance</subfield>
+<subfield label="2">eczenas</subfield>
+</varfield>
+<varfield id="650" i1="0" i2="9">
+<subfield label="a">management</subfield>
+<subfield label="2">eczenas</subfield>
+</varfield>
+<varfield id="655" i1=" " i2="7">
+<subfield label="a">sborníky konferencí</subfield>
+<subfield label="7">fd133333</subfield>
+<subfield label="2">czenas</subfield>
+</varfield>
+<varfield id="655" i1=" " i2="9">
+<subfield label="a">proceedings of conferences</subfield>
+<subfield label="2">eczenas</subfield>
+</varfield>
+<varfield id="700" i1="1" i2=" ">
+<subfield label="a">Kubíčková, Dana</subfield>
+<subfield label="4">edt</subfield>
+</varfield>
+<varfield id="710" i1="2" i2=" ">
+<subfield label="a">Vysoká škola finanční a správní</subfield>
+</varfield>
+<varfield id="856" i1="4" i2="0">
+<subfield label="u">http://edeposit-test.nkp.cz/producents/beta-nakladatelstvi/epublications/controlling-v-msp-nejen-o-cislech/controlling.pdf</subfield>
+<subfield label="4">N</subfield>
+</varfield>
+<varfield id="856" i1="4" i2="2">
+<subfield label="u">http://edeposit.nkp.cz/</subfield>
+<subfield label="4">N</subfield>
+</varfield>
+<varfield id="901" i1=" " i2=" ">
+<subfield label="f">1. vyd.</subfield>
+<subfield label="o">20150209</subfield>
+</varfield>
+<varfield id="910" i1=" " i2=" ">
+<subfield label="a">ABA001</subfield>
+</varfield>
+<varfield id="928" i1="1" i2=" ">
+<subfield label="a">Vysoká škola finanční a správní</subfield>
+</varfield>
+<varfield id="998" i1=" " i2=" ">
+<subfield label="a">http://aleph.nkp.cz/F/?func=direct&amp;doc_number=000003024&amp;local_base=CZE-DEP</subfield>
+</varfield>
+<varfield id="IST" i1="1" i2=" ">
+<subfield label="a">ox20150209</subfield>
+<subfield label="b">jitka.mala</subfield>
+</varfield>
+<varfield id="IST" i1="1" i2=" ">
+<subfield label="a">ii20150209</subfield>
+<subfield label="b">anje</subfield>
+</varfield>
+<varfield id="IST" i1="1" i2=" ">
+<subfield label="a">jp20150211</subfield>
+<subfield label="b">juri</subfield>
+</varfield>
+<varfield id="IST" i1="1" i2=" ">
+<subfield label="a">jr20150212</subfield>
+<subfield label="b">japr</subfield>
+</varfield>
+<varfield id="IST" i1="1" i2=" ">
+<subfield label="a">vp20150213</subfield>
+<subfield label="b">napo</subfield>
+</varfield>
+<varfield id="IST" i1="1" i2=" ">
+<subfield label="a">vr20150224</subfield>
+<subfield label="b">mase</subfield>
+</varfield>
+<varfield id="POV" i1=" " i2=" ">
+<subfield label="a">550</subfield>
+<subfield label="b">550</subfield>
+<subfield label="c">1. vyd.</subfield>
+<subfield label="i">515 s.</subfield>
+<subfield label="k">0</subfield>
+<subfield label="l">05</subfield>
+</varfield>
+<varfield id="HLD" i1=" " i2=" ">
+<subfield label="l">15/EB 00002</subfield>
+<subfield label="n">uložení</subfield>
+<subfield label="s">20150209</subfield>
+<subfield label="j">e-book</subfield>
+<subfield label="z">978-80-7408_04022015_00001</subfield>
+</varfield>
+<varfield id="STZ" i1=" " i2=" ">
+<subfield label="a">du20150209</subfield>
+<subfield label="b">mazi</subfield>
+</varfield>
+<varfield id="SKC" i1=" " i2=" ">
+<subfield label="a">2015</subfield>
+</varfield>
+</oai_marc>
+</metadata>
+</record>
+<session-id>QET4N45YJ2GGB7C6RRY27XRPXMJPQJVA2N6DDS1MN6IB8AM141</session-id>
+</present>

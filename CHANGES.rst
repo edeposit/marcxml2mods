@@ -1,6 +1,13 @@
 Changelog
 =========
 
+0.2.5
+-----
+    - Postprocessing API redefined slightly.
+    - Added MARC XML record parameter for all postprocessing functions.
+    - Added fix_missing_lang_tags().
+    - Added test coverage of fix_missing_lang_tags().
+
 0.2.4
 -----
     - Code rewritten to use first() getter.

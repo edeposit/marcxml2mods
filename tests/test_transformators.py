@@ -41,12 +41,22 @@ def validity_test(xml):
 
 # Fixtures ====================================================================
 @pytest.fixture
-def mono_example():
+def post_mono_example():
     return get_test_file_content("postprocessed_mods.xml")
 
 
+@pytest.fixture
+def lang_example():
+    return get_test_file_content("lang_example.oai")
+
+
+@pytest.fixture
+def post_lang_example():
+    return get_test_file_content("postprocessed_lang_example.xml")
+
+
 # Tests =======================================================================
-def test_transform_to_mods_mono(mono_example):
+def test_transform_to_mods_mono(post_mono_example):
     result = transformators.transform_to_mods_mono(
         OAI_FILENAME,
         "someid",
@@ -54,12 +64,25 @@ def test_transform_to_mods_mono(mono_example):
     )
 
     assert result
-    assert result[0] == mono_example
+    assert result[0] == post_mono_example
 
     validity_test(result[0])
 
 
-def test_marcxml2mods(mono_example):
+def test_transform_to_mods_mono_lang_example(lang_example, post_lang_example):
+    result = transformators.transform_to_mods_mono(
+        lang_example,
+        "someid",
+        "http://kitakitsune.org/raw",
+    )
+
+    assert result
+    assert result[0] == post_lang_example
+
+    validity_test(result[0])
+
+
+def test_marcxml2mods(post_mono_example):
     result = transformators.marcxml2mods(
         OAI_FILENAME,
         "someid",
@@ -68,6 +91,6 @@ def test_marcxml2mods(mono_example):
     # TODO: Add tests for each type of document
 
     assert result
-    assert result[0] == mono_example
+    assert result[0] == post_mono_example
 
     validity_test(result[0])

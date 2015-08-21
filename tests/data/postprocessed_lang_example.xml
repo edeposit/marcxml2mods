@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mods:mods version="3.4" ID="MODS_VOLUME_0001" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema-instance http://www.w3.org/2001/XMLSchema.xsd http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-4.xsd http://www.w3.org/1999/xlink http://www.w3.org/1999/xlink.xsd">
+  <mods:titleInfo>
+    <mods:title>Controlling v MSP - nejen o číslech</mods:title>
+    <mods:subTitle>sborník z mezinárodní vědecké konference : Praha, 25. dubna 2014, Vysoká škola finanční a správní = Controlling in SMEs - beyond numbers : proceedings of the international scientific conference : Prague, April 25th, 2014, University of Finance and Administration Prague</mods:subTitle>
+  </mods:titleInfo>
+  <mods:titleInfo type="alternative">
+    <mods:title>Controlling in SMEs - beyond numbers</mods:title>
+  </mods:titleInfo>
+  <mods:name type="conference">
+    <mods:namePart>Controlling v MSP - nejen o číslech Praha, Česko) (2014 :</mods:namePart>
+  </mods:name>
+  <mods:name type="personal">
+    <mods:namePart>Kubíčková, Dana</mods:namePart>
+    <mods:role>
+      <mods:roleTerm authority="marcrelator" type="code">edt</mods:roleTerm>
+    </mods:role>
+  </mods:name>
+  <mods:name type="corporate">
+    <mods:namePart>Vysoká škola finanční a správní</mods:namePart>
+  </mods:name>
+  <mods:typeOfResource>text</mods:typeOfResource>
+  <mods:genre authority="marcgt">conference publication</mods:genre>
+  <mods:genre authority="czenas">sborníky konferencí</mods:genre>
+  <mods:genre authority="eczenas">proceedings of conferences</mods:genre>
+  <mods:genre>electronic volume</mods:genre>
+  <mods:originInfo>
+    <mods:place>
+      <mods:placeTerm type="code" authority="marccountry">xr-</mods:placeTerm>
+    </mods:place>
+    <mods:place>
+      <mods:placeTerm type="text">Praha</mods:placeTerm>
+    </mods:place>
+    <mods:publisher>Vysoká škola finanční a správní</mods:publisher>
+    <mods:dateIssued>2014</mods:dateIssued>
+    <mods:edition>1. vyd.</mods:edition>
+    <mods:issuance>single unit</mods:issuance>
+  </mods:originInfo>
+  <mods:language>
+    <mods:languageTerm authority="iso639-2b" type="code">cze</mods:languageTerm>
+  </mods:language>
+  <mods:language>
+    <mods:languageTerm authority="iso639-2b" type="code">eng</mods:languageTerm>
+  </mods:language>
+  <mods:language>
+    <mods:languageTerm authority="iso639-2b" type="code">rus</mods:languageTerm>
+  </mods:language>
+  <mods:physicalDescription>
+    <mods:form authority="marccategory">text</mods:form>
+    <mods:form authority="marcsmd">regular print</mods:form>
+    <mods:extent>1 online zdroj (515 s.) : il. (některé barev.)</mods:extent>
+  </mods:physicalDescription>
+  <mods:targetAudience authority="marctarget">adult</mods:targetAudience>
+  <mods:note type="statement of responsibility">[editor Dana Kubíčková]</mods:note>
+  <mods:note type="bibliography">Obsahuje bibliografie</mods:note>
+  <mods:note type="language">Český, anglický a ruský text</mods:note>
+  <mods:subject authority="czenas">
+    <mods:topic>finance</mods:topic>
+  </mods:subject>
+  <mods:subject authority="czenas">
+    <mods:topic>management</mods:topic>
+  </mods:subject>
+  <mods:subject authority="eczenas">
+    <mods:topic>finance</mods:topic>
+  </mods:subject>
+  <mods:subject authority="eczenas">
+    <mods:topic>management</mods:topic>
+  </mods:subject>
+  <mods:classification authority="udc">336</mods:classification>
+  <mods:classification authority="udc">005</mods:classification>
+  <mods:classification authority="udc">(062.534)</mods:classification>
+  <mods:location>
+    <mods:holdingSimple>
+      <mods:copyInformation>
+        <mods:electronicLocator>http://edeposit-test.nkp.cz/producents/beta-nakladatelstvi/epublications/controlling-v-msp-nejen-o-cislech/controlling.pdf</mods:electronicLocator>
+      </mods:copyInformation>
+    </mods:holdingSimple>
+  </mods:location>
+  <mods:identifier type="uuid">someid</mods:identifier>
+  <mods:identifier type="ccnb">cnb000003024</mods:identifier>
+  <mods:identifier type="isbn">978-80-7408-086-9</mods:identifier>
+    <mods:recordInfo>
+    <mods:descriptionStandard>aacr</mods:descriptionStandard>
+    <mods:recordContentSource authority="marcorg">ABA001</mods:recordContentSource>
+    <mods:recordCreationDate encoding="marc">150211</mods:recordCreationDate>
+    <mods:recordChangeDate encoding="iso8601">20150224090043.0</mods:recordChangeDate>
+    <mods:recordIdentifier source="CZ-PrNK">nkc20150003024</mods:recordIdentifier>
+    <mods:recordOrigin>machine generated</mods:recordOrigin>
+    <mods:languageOfCataloging>
+      <mods:languageTerm authority="iso639-2b" type="code">cze</mods:languageTerm>
+    </mods:languageOfCataloging>
+  </mods:recordInfo>
+</mods:mods>
