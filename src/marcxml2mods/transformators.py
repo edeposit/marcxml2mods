@@ -64,6 +64,8 @@ def transform_to_mods_mono(marc_xml, uuid, url):
     Returns:
         list: Collection of transformed xml strings.
     """
+    marc_xml = _read_content_or_path(marc_xml)
+
     transformed = xslt_transformation(
         marc_xml,
         _absolute_template_path("MARC21slim2MODS3-4-NDK.xsl")
@@ -91,6 +93,8 @@ def transform_to_mods_multimono(marc_xml, uuid, url):
     Returns:
         list: Collection of transformed xml strings.
     """
+    marc_xml = _read_content_or_path(marc_xml)
+
     transformed = xslt_transformation(
         marc_xml,
         _absolute_template_path("MARC21toMultiMonographTitle.xsl")
@@ -118,6 +122,8 @@ def transform_to_mods_periodical(marc_xml, uuid, url):
     Returns:
         list: Collection of transformed xml strings.
     """
+    marc_xml = _read_content_or_path(marc_xml)
+
     transformed = xslt_transformation(
         marc_xml,
         _absolute_template_path("MARC21toPeriodicalTitle.xsl")
@@ -153,9 +159,8 @@ def type_decisioner(marc_xml, mono_callback, multimono_callback,
     Raises:
         ValueError: In case that type couldn't be detected.
     """
-    record = MARCXMLRecord(
-        _read_content_or_path(marc_xml)
-    )
+    marc_xml = _read_content_or_path(marc_xml)
+    record = MARCXMLRecord(marc_xml)
 
     if record.is_monographic or record.is_single_unit:
         return mono_callback()
@@ -181,6 +186,8 @@ def marcxml2mods(marc_xml, uuid, url):
     Returns:
         list: Collection of transformed xml strings.
     """
+    marc_xml = _read_content_or_path(marc_xml)
+
     return type_decisioner(
         marc_xml,
         lambda: transform_to_mods_mono(marc_xml, uuid, url),
